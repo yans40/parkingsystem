@@ -36,6 +36,7 @@ public class ParkingServiceTest {
 
 	@BeforeEach
 	private void setUpPerTest() {
+
 		try {
 			when(inputReaderUtil.readVehicleRegistrationNumber())
 					.thenReturn("ABCDEF");
@@ -61,11 +62,6 @@ public class ParkingServiceTest {
 		}
 	}
 
-	@Test
-	void processIncomingVehicleTest() {
-
-
-	}
 
 
 	@Test
@@ -75,10 +71,5 @@ public class ParkingServiceTest {
 				.updateParking(any(ParkingSpot.class));
 	}
 
-
-
-	@Test
-	void getNextParkingNumberIfAvailableTest() {
-	}
 
 }
