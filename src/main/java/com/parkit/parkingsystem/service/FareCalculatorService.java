@@ -5,6 +5,8 @@ import com.parkit.parkingsystem.model.Ticket;
 import org.jetbrains.annotations.NotNull;
 
 
+
+
 public class FareCalculatorService {
 
 	public void calculateFare(Ticket ticket) {

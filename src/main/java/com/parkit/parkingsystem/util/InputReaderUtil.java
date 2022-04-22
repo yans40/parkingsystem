@@ -21,7 +21,7 @@ public class InputReaderUtil {
         }
     }
 
-    public String readVehicleRegis trationNumber() throws Exception {
+    public String readVehicleRegistrationNumber() throws Exception {
         try {
             String vehicleRegNumber = scan.nextLine();
             if (vehicleRegNumber == null || vehicleRegNumber.trim().length() == 0) {

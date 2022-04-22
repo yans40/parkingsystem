@@ -41,13 +41,20 @@ public class ParkingService {
                 //ticket.setId(ticketID);
                 ticket.setParkingSpot(parkingSpot);
                 ticket.setVehicleRegNumber(vehicleRegNumber);
+                ticket.setRecurrent(ticketDAO.isRecurrent(vehicleRegNumber));
                 ticket.setPrice(0);
                 ticket.setInTime(inTime);
                 ticket.setOutTime(null);
                 ticketDAO.saveTicket(ticket);
+
+
                 System.out.println("Generated Ticket and saved in DB");
                 System.out.println("Please park your vehicle in spot number:" + parkingSpot.getId());
                 System.out.println("Recorded in-time for vehicle number:" + vehicleRegNumber + " is:" + inTime);
+
+                if (ticketDAO.isRecurrent(vehicleRegNumber)) {
+                    System.out.println("Happy to see you again. you win 5% reduction on your bill");
+                }
             }
         } catch (Exception e) {
             logger.error("Unable to process incoming vehicle", e);
