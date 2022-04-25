@@ -67,6 +67,6 @@ public class Ticket {
     }
 
     public void setRecurrent(boolean recurrent) {
-        isRecurrent = recurrent;
+        this.isRecurrent = recurrent;
     }
 }

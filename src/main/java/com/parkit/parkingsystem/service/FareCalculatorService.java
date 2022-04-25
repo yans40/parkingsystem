@@ -2,18 +2,15 @@ package com.parkit.parkingsystem.service;
 
 import com.parkit.parkingsystem.constants.Fare;
 import com.parkit.parkingsystem.model.Ticket;
-import org.jetbrains.annotations.NotNull;
-
-
 
 
 public class FareCalculatorService {
 
-	public void calculateFare(Ticket ticket) {
-		if ((ticket.getOutTime() == null)
-				|| (ticket.getOutTime().before(ticket.getInTime()))) {
-			throw new IllegalArgumentException("Out time provided is incorrect:" + ticket.getOutTime().toString());
-		}
+    public void calculateFare(Ticket ticket) {
+        if ((ticket.getOutTime() == null)
+                || (ticket.getOutTime().before(ticket.getInTime()))) {
+            throw new IllegalArgumentException("Out time provided is incorrect:" + ticket.getOutTime().toString());
+        }
 
         long inHour = ticket.getInTime().getTime();
         long outHour = ticket.getOutTime().getTime();
@@ -25,21 +22,28 @@ public class FareCalculatorService {
 
         double durationTime = 0;
 
-        if  (durationPark >= 0.5) {
+        if (durationPark >= 0.5) {
 
-            durationTime = durationPark ;
+            durationTime = durationPark;
         }
 
 
+        double recurrentCustomerBonus = 1;
+
+        if (ticket.isRecurrent()) {
+
+            recurrentCustomerBonus = 0.95 ;
+
+        }
 
         switch (ticket.getParkingSpot().getParkingType()) {
 
             case CAR: {
-                ticket.setPrice(durationTime * Fare.CAR_RATE_PER_HOUR);
+                ticket.setPrice(durationTime * Fare.CAR_RATE_PER_HOUR * recurrentCustomerBonus);
                 break;
             }
             case BIKE: {
-                ticket.setPrice(durationTime * Fare.BIKE_RATE_PER_HOUR);
+                ticket.setPrice(durationTime * Fare.BIKE_RATE_PER_HOUR * recurrentCustomerBonus);
                 break;
             }
 
