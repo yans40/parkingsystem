@@ -4,9 +4,11 @@ import com.parkit.parkingsystem.constants.Fare;
 import com.parkit.parkingsystem.model.Ticket;
 
 
-public class FareCalculatorService {
+public
+class FareCalculatorService {
 
-    public void calculateFare(Ticket ticket) {
+    public
+    void calculateFare(Ticket ticket) {
         if ((ticket.getOutTime() == null)
                 || (ticket.getOutTime().before(ticket.getInTime()))) {
             throw new IllegalArgumentException("Out time provided is incorrect:" + ticket.getOutTime().toString());
@@ -27,23 +29,19 @@ public class FareCalculatorService {
             durationTime = durationPark;
         }
 
-
-        double recurrentCustomerBonus = 1;
-
+        double recurringUserDiscount = 1;
         if (ticket.isRecurrent()) {
-
-            recurrentCustomerBonus = 0.95 ;
-
+            recurringUserDiscount = 0.95;
         }
 
         switch (ticket.getParkingSpot().getParkingType()) {
 
             case CAR: {
-                ticket.setPrice(durationTime * Fare.CAR_RATE_PER_HOUR * recurrentCustomerBonus);
+                ticket.setPrice(durationTime * Fare.CAR_RATE_PER_HOUR * recurringUserDiscount);
                 break;
             }
             case BIKE: {
-                ticket.setPrice(durationTime * Fare.BIKE_RATE_PER_HOUR * recurrentCustomerBonus);
+                ticket.setPrice(durationTime * Fare.BIKE_RATE_PER_HOUR * recurringUserDiscount);
                 break;
             }
 

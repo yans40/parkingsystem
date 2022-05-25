@@ -1,28 +1,40 @@
 package com.parkit.parkingsystem.util;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Scanner;
+
 
 class InputReaderUtilTest {
 
 
-    private static final Scanner scan = new Scanner(System.in);
-
-    private static final Logger logger = LogManager.getLogger("InputReaderUtilTest");
-
-  //  @Test
-  //  public int readSelection() {
-    //     int input = Integer.parseInt(scan.nextLine(4));
-  //      return 4;
-   //     assertThat
-  //  }
+  /*  private static InputReaderUtil inputReaderUtil = new InputReaderUtil();
+    private static Scanner scan = new Scanner(System.in);*/
 
     @Test
-    void readVehicleRegistrationNumber() {
+    void readWrightSelection() {
+
+    }
 
 
+    @Test
+    void ReadWrightVehicleRegistrationNumber() throws Exception {
+
+
+//ARRANGE
+    /*    String input = "ABCDEF";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        String vehicleRegNumber = scan.nextLine();
+
+//ACT
+        inputReaderUtil.readVehicleRegistrationNumber();
+
+//ASSERT
+
+        Assertions.assertEquals("ABCDEF", inputReaderUtil.readVehicleRegistrationNumber());*/
     }
 }

@@ -2,7 +2,8 @@ package com.parkit.parkingsystem.model;
 
 import java.util.Date;
 
-public class Ticket {
+public
+class Ticket {
     private int id;
     private ParkingSpot parkingSpot;
     private String vehicleRegNumber;
@@ -12,61 +13,78 @@ public class Ticket {
 
     private boolean isRecurrent;
 
-    public int getId() {
+    public
+    int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public
+    void setId(int id) {
         this.id = id;
     }
 
-    public ParkingSpot getParkingSpot() {
-        return parkingSpot;
+    public
+    ParkingSpot getParkingSpot() {
+        return new ParkingSpot(parkingSpot.getId(), parkingSpot.getParkingType(), parkingSpot.isAvailable());
     }
 
-    public void setParkingSpot(ParkingSpot parkingSpot) {
-        this.parkingSpot = parkingSpot;
+    public
+    void setParkingSpot(ParkingSpot parkingSpot) {
+        this.parkingSpot = new ParkingSpot(parkingSpot.getId(), parkingSpot.getParkingType(), parkingSpot.isAvailable());
     }
 
-    public String getVehicleRegNumber() {
+    public
+    String getVehicleRegNumber() {
         return vehicleRegNumber;
     }
 
-    public void setVehicleRegNumber(String vehicleRegNumber) {
+    public
+    void setVehicleRegNumber(String vehicleRegNumber) {
         this.vehicleRegNumber = vehicleRegNumber;
     }
 
-    public double getPrice() {
+    public
+    double getPrice() {
         return price;
     }
 
 
-
-    public void setPrice(double price) {
+    public
+    void setPrice(double price) {
         this.price = price;
     }
 
-    public Date getInTime() {
-        return inTime;
+    public
+    Date getInTime() {
+        return new Date(inTime.getTime());
     }
 
-    public void setInTime(Date inTime) {
-        this.inTime = inTime;
+    public
+    void setInTime(Date inTime) {
+        this.inTime = new Date(inTime.getTime());
     }
 
-    public Date getOutTime() {
-        return outTime;
+    public
+    Date getOutTime() {
+        if (outTime == null) {
+            return null;
+        } else {
+            return new Date(outTime.getTime());
+        }
     }
 
-    public void setOutTime(Date outTime) {
-        this.outTime = outTime;
+    public
+    void setOutTime(Date outTime) {
+        this.outTime = new Date(outTime.getTime());
     }
 
-    public boolean isRecurrent() {
+    public
+    boolean isRecurrent() {
         return isRecurrent;
     }
 
-    public void setRecurrent(boolean recurrent) {
+    public
+    void setIsRecurrent(boolean recurrent) {
         this.isRecurrent = recurrent;
     }
 }

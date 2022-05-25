@@ -3,19 +3,42 @@ package com.parkit.parkingsystem.config;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.*;
+import java.util.Properties;
 
-public class DataBaseConfig {
+public
+class DataBaseConfig {
 
     private static final Logger logger = LogManager.getLogger("DataBaseConfig");
 
-    public Connection getConnection() throws ClassNotFoundException, SQLException {
+
+    public
+    Connection getConnection() throws ClassNotFoundException, SQLException {
+
+
+        Properties props = new Properties();
+        try (FileInputStream fis = new FileInputStream("conf.properties")) {
+            props.load(fis);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         logger.info("Create DB connection");
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/prod", "root", "ROOTROOT");
+        Class.forName(props.getProperty("jdbc.driver.class"));
+
+
+        String url = props.getProperty("jdbc.url");
+        String user = props.getProperty("jdbc.login");
+        String password = props.getProperty("jdbc.password");
+
+        return DriverManager.getConnection(url, user, password);
     }
 
-    public void closeConnection(Connection con) {
+
+    public
+    void closeConnection(Connection con) {
         if (con != null) {
             try {
                 con.close();
@@ -26,7 +49,8 @@ public class DataBaseConfig {
         }
     }
 
-    public void closePreparedStatement(PreparedStatement ps) {
+    public
+    void closePreparedStatement(PreparedStatement ps) {
         if (ps != null) {
             try {
                 ps.close();
@@ -37,7 +61,8 @@ public class DataBaseConfig {
         }
     }
 
-    public void closeResultSet(ResultSet rs) {
+    public
+    void closeResultSet(ResultSet rs) {
         if (rs != null) {
             try {
                 rs.close();
