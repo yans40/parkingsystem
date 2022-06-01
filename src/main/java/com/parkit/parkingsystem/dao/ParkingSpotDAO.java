@@ -11,7 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class ParkingSpotDAO {
+public
+class ParkingSpotDAO {
     private static final Logger logger = LogManager.getLogger("ParkingSpotDAO");
 
     public DataBaseConfig dataBaseConfig = new DataBaseConfig();
@@ -41,10 +42,10 @@ public class ParkingSpotDAO {
         return result;
     }
 
-    public boolean updateParking(ParkingSpot parkingSpot) {
+    public void updateParking(ParkingSpot parkingSpot) {
         //update the availability fo that parking slot
         Connection con = null;
-        PreparedStatement ps =null;
+        PreparedStatement ps = null;
         try {
             con = dataBaseConfig.getConnection();
             ps = con.prepareStatement(DBConstants.UPDATE_PARKING_SPOT);
@@ -52,10 +53,8 @@ public class ParkingSpotDAO {
             ps.setInt(2, parkingSpot.getId());
             int updateRowCount = ps.executeUpdate();
             dataBaseConfig.closePreparedStatement(ps);
-            return (updateRowCount == 1);
         } catch (Exception ex) {
             logger.error("Error updating parking info", ex);
-            return false;
         } finally {
             dataBaseConfig.closeConnection(con);
             dataBaseConfig.closePreparedStatement(ps);

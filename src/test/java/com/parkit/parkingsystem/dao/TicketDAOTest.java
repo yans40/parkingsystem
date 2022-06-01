@@ -1,32 +1,33 @@
 package com.parkit.parkingsystem.dao;
 
 import com.parkit.parkingsystem.constants.ParkingType;
+import com.parkit.parkingsystem.integration.config.DataBaseTestConfig;
 import com.parkit.parkingsystem.model.ParkingSpot;
 import com.parkit.parkingsystem.model.Ticket;
-import org.apache.logging.log4j.core.util.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Date;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 @ExtendWith(MockitoExtension.class)
 class TicketDAOTest {
 
 
-    private static ParkingSpot parkingSpot =new ParkingSpot(1, ParkingType.CAR, true);
+    private static final DataBaseTestConfig dataBaseTestConfig = new DataBaseTestConfig();
 
 
+    private static final ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR, true);
 
 
     @Test
     void saveTicket() {
-        TicketDAO ticketDAO =new TicketDAO();
-
+        TicketDAO ticketDAO = new TicketDAO();
+        ticketDAO.dataBaseConfig = dataBaseTestConfig;
 
         Ticket ticket = new Ticket();
 
@@ -44,17 +45,12 @@ class TicketDAOTest {
 
     @Test
     void getTicketbyId() {
-        TicketDAO ticketDAO =new TicketDAO();
-        Ticket  ticket = ticketDAO.getTicket("NOCAR");
+        TicketDAO ticketDAO = new TicketDAO();
+        ticketDAO.dataBaseConfig = dataBaseTestConfig;
+        Ticket ticket = ticketDAO.getTicket("NOCAR");
         Assertions.assertNull(ticket);
         assertFalse(ticketDAO.isRecurrent("NOCAR"));
     }
 
-  /*  @Test
-    void updateTicket() {
-    }
 
-    @Test
-    void isRecurrent() {
-    }*/
 }
